@@ -111,3 +111,5 @@ int index_status(const Index *idx) {
 
     return 0;
 }
+// Phase 3: index_add implemented
+
