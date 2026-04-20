@@ -115,3 +115,4 @@ int index_status(const Index *idx) {
 
 // Phase 3: index_save implemented
 // Phase 3: index_load implemented
+// Phase 3 complete
