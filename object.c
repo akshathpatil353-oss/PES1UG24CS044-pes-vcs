@@ -168,3 +168,4 @@ int object_read(const ObjectID *id, ObjectType *type_out, void **data_out, size_
 //phase 1 progress
 //hashing added
 //object storage done
+//phase 1 complete
