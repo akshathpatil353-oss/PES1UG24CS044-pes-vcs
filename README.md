@@ -20,13 +20,13 @@ make all
 
 **Files modified:** `object.c`
 
-`object_write` creates objects in the format `<type> <size>\0<data>`, computes SHA-256 hash using `compute_hash`, ensures deduplication, writes using a temporary file, and renames atomically.
+`object_write` creates objects in the format `<type> <size>\0<data>`, computes SHA-256 hash using `compute_hash`, ensures deduplication, and writes data atomically using temp file + rename.
 
-`object_read` reads objects, verifies integrity by recomputing hash, parses header, and returns the stored data.
+`object_read` reads stored objects, verifies integrity using hash comparison, parses header, and returns the data.
 
-### SCREENSHOTS — Phase 1 Output
+### Screenshot — Object Storage Test
 
-![Phase 1](phase1.png)
+![Phase 1](SCREENSHOTS/phase1.png)
 
 ---
 
@@ -34,11 +34,11 @@ make all
 
 **Files modified:** `tree.c`
 
-`tree_from_index` builds a directory tree structure from index entries. It handles nested directories recursively and stores tree objects using content-addressable storage.
+`tree_from_index` constructs directory structure from index entries, handles nested paths recursively, and stores tree objects.
 
-### SCREENSHOTS — Phase 2 Output
+### Screenshot — Tree Test Output
 
-![Phase 2](phase2.png)
+![Phase 2](SCREENSHOTS/phase2.png)
 
 ---
 
@@ -46,15 +46,13 @@ make all
 
 **Files modified:** `index.c`
 
-`index_load` loads index entries from `.pes/index`.
+* `index_load` reads `.pes/index`
+* `index_save` writes index safely
+* `index_add` stages files
 
-`index_save` writes index atomically.
+### Screenshot — Index and Status
 
-`index_add` stages files by hashing and updating index.
-
-### SCREENSHOTS — Phase 3 Output
-
-![Phase 3](phase3.png)
+![Phase 3](SCREENSHOTS/phase3.png)
 
 ---
 
@@ -64,22 +62,22 @@ make all
 
 `commit_create`:
 
-* Builds tree from index
+* Builds tree from staged files
 * Reads parent commit
 * Stores commit object
-* Updates HEAD reference
+* Updates HEAD
 
-### SCREENSHOTS — Commit Log
+### Screenshot — Commit Log
 
-![Phase 4A](phase4a.png)
+![Phase 4A](SCREENSHOTS/phase4a.png)
 
-### SCREENSHOTS— Object Store
+### Screenshot — Object Store Growth
 
-![Phase 4B](phase4b.png)
+![Phase 4B](SCREENSHOTS/phase4b.png)
 
-### SCREENSHOTS — HEAD and Branch
+### Screenshot — HEAD & Branch
 
-![Phase 4C](phase4c.png)
+![Phase 4C](SCREENSHOTS/phase4c.png)
 
 ---
 
@@ -88,20 +86,20 @@ make all
 ### Q5.1 — Checkout Implementation
 
 * Update `.pes/HEAD`
-* Load target commit
-* Update working directory files
+* Load commit from branch
+* Update working directory
 * Handle conflicts
 
 ### Q5.2 — Dirty Check
 
-* Compare index vs working directory
-* Use metadata (mtime, size) + hashing
+* Compare working files with index
+* Use metadata + hashing
 
 ### Q5.3 — Detached HEAD
 
-* HEAD points to commit directly
-* New commits are not linked to any branch
-* Recovery by creating a new branch
+* HEAD points to commit
+* Commits not linked to branch
+* Recovery by creating branch
 
 ---
 
@@ -109,22 +107,22 @@ make all
 
 ### Q6.1 — Mark and Sweep
 
-* Start from HEAD and branches
-* Traverse commits, trees, blobs
-* Delete unreachable objects
+* Traverse from HEAD
+* Mark reachable objects
+* Delete unreachable
 
 ### Q6.2 — Race Condition
 
 * GC may delete objects during commit
-* Git avoids using grace period and safe writes
+* Git avoids using safe writes
 
 ---
 
 ## Conclusion
 
-This project demonstrates how Git internally manages version control using:
+This project demonstrates Git internals:
 
 * Content-addressable storage
-* Trees and commits
+* Tree structure
 * Index staging
-* Efficient storage and integrity checks
+* Efficient version tracking
