@@ -24,7 +24,7 @@ make all
 
 `object_read` reads objects, verifies integrity by recomputing hash, parses header, and returns the stored data.
 
-### Screenshot — Phase 1 Output
+### SCREENSHOTS — Phase 1 Output
 
 ![Phase 1](phase1.png)
 
@@ -36,7 +36,7 @@ make all
 
 `tree_from_index` builds a directory tree structure from index entries. It handles nested directories recursively and stores tree objects using content-addressable storage.
 
-### Screenshot — Phase 2 Output
+### SCREENSHOTS — Phase 2 Output
 
 ![Phase 2](phase2.png)
 
@@ -52,7 +52,7 @@ make all
 
 `index_add` stages files by hashing and updating index.
 
-### Screenshot — Phase 3 Output
+### SCREENSHOTS — Phase 3 Output
 
 ![Phase 3](phase3.png)
 
@@ -69,15 +69,15 @@ make all
 * Stores commit object
 * Updates HEAD reference
 
-### Screenshot — Commit Log
+### SCREENSHOTS — Commit Log
 
 ![Phase 4A](phase4a.png)
 
-### Screenshot — Object Store
+### SCREENSHOTS— Object Store
 
 ![Phase 4B](phase4b.png)
 
-### Screenshot — HEAD and Branch
+### SCREENSHOTS — HEAD and Branch
 
 ![Phase 4C](phase4c.png)
 
