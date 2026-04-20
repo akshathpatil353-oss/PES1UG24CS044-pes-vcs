@@ -114,3 +114,4 @@ int tree_from_index(ObjectID *id_out) {
     free(data);
     return 0;
 }
+// Phase 2 progress - building tree structure
